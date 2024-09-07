@@ -1,10 +1,18 @@
-export default function SideBar(){
+import Button from './Button';
+
+export default function SideBar({onStartAddProject, projectsState, onSelectProject}){
 	return (
-		<div className="w-4/12 h-screen bg-black rounded-lg">
-			<div className="pl-10 pt-10">
-				<p className="text-white text-large font-bold">YOUR PROJECTS</p>
-				<button type="button" className="rounded-md p-2 bg-slate-700 text-gray-400 mt-10 hover:bg-slate-500 hover:text-white">+ Add Project</button>
+		<aside className="w-1/3 px-8 py-16 bg-stone-900 text-stone-50 rounded-r-xl md:w-72">
+			<h2 className="mb-8 text-stone-200 md:text-xl uppercase font-bold">Your Projects</h2>
+			<div>
+				<Button onClick={onStartAddProject}>+ Add Project</Button>
 			</div>
-		</div>
+			<div>
+				<ul className="mt-10">
+					{projectsState.projects.map((project) => 
+						<li onClick={() => onSelectProject(project.id)} key={project.id} className="my-2 text-stone-400 hover:bg-stone-700 hover:text-stone-200">{project.title}</li>)}
+				</ul>
+			</div>
+		</aside>
 	)
 }
