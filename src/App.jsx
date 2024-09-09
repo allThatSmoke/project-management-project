@@ -87,15 +87,16 @@ function App() {
   function handleDeleteProject(id){
     setProjectsState((prevState) => {
       return {
+        ...prevState,
         selectedProjectId: undefined,
-        projects: prevState.projects.filter(project => project.id !== id)
+        projects: prevState.projects.filter(project => project.id !== id),
+        tasks: prevState.tasks.filter(task => task.projectId !== id)
       }
-    })
-  }
+    })}
 
   const selectedProject = projectsState.projects.find((project) => {
-    return project.id === projectsState.selectedProjectId
-  });
+    return project.id === projectsState.selectedProjectId;
+  })
 
   const selectedProjectTasks = projectsState.tasks.filter((task) => {
     return task.projectId === projectsState.selectedProjectId
@@ -123,7 +124,7 @@ function App() {
         onStartAddProject={handleStartAddProject} 
         projects={projectsState.projects}
         onSelectProject={handleSelectProject}
-        selectedProjectId={selectedProject.id}
+        selectedProjectId={projectsState.selectedProjectId}
       />
       {content}
     </main>
